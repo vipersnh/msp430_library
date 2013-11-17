@@ -117,15 +117,13 @@ uint8_t __UART__::gets(uint8_t *buffer,uint16_t length)
 * DESCRIPTION        : Insert the characters from the given buffer into the tx buffer. 
 		       Count of characters is given in length.
 */
-uint8_t __UART__::puts(char const *buffer, uint16_t length = 0)
+uint8_t __UART__::puts(char const *buffer, uint16_t length )
 {
 	if(length == 0)
 	{
-		char *c = buffer;
-		while(*c)
+		while(buffer[length])
 		{
 			length++;
-			c++;
 		}
 	}
 	if((UART_BUFFER_LENGTH - tx_length) > length)
