@@ -7,7 +7,6 @@
 #include "uart.hpp"
 
 
-
 /*
 * NAME               : __UART__::__UART__()
 * DESCRIPTION        : __UART__ constructor
@@ -118,8 +117,17 @@ uint8_t __UART__::gets(uint8_t *buffer,uint16_t length)
 * DESCRIPTION        : Insert the characters from the given buffer into the tx buffer. 
 		       Count of characters is given in length.
 */
-uint8_t __UART__::puts(char const *buffer, uint16_t length)
+uint8_t __UART__::puts(char const *buffer, uint16_t length = 0)
 {
+	if(length == 0)
+	{
+		char *c = buffer;
+		while(*c)
+		{
+			length++;
+			c++;
+		}
+	}
 	if((UART_BUFFER_LENGTH - tx_length) > length)
 	{
 		disable_uart_interrupts();
